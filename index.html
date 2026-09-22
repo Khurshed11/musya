@@ -130,12 +130,19 @@
         var foot = tree.footer;
         var hold = 1;
 
-      canvas.click(function (e) {
+canvas.click(function (e) {
     var offset = canvas.offset(), x, y;
     x = e.pageX - offset.left;
     y = e.pageY - offset.top;
     if (seed.hover(x, y)) {
-        document.getElementById('myAudio').play();
+        // Запускаем верхнюю рабочую музыку и вращаем иконку:
+        var m = document.querySelector('.song-audio-autoplay');
+        if (m) { 
+            m.play(); 
+            var img = document.querySelector('img[onclick*="song-audio-autoplay"]');
+            if (img) img.className = 'rotateImages';
+        }
+
         hold = 0;
         canvas.unbind("click");
         canvas.unbind("mousemove");
