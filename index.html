@@ -74,7 +74,7 @@
     }).reduce((a, b) => {
         return a + b;
     }))
-    $("#clock-box-inside-text").html(`${config.names[0]}<span class="STYLE1">与</span> ${config.names[1]}<span class="STYLE1">已经相恋了</span>`)
+   $("#clock-box-inside-text").html(config.names[0] + ' и ' + config.names[1] + ' <span class="STYLE1">вместе уже:</span>');
 </script>
 
 <script>
@@ -138,10 +138,12 @@
             x = e.pageX - offset.left;
             y = e.pageY - offset.top;
             if (seed.hover(x, y)) {
-                hold = 0;
-                canvas.unbind("click");
-                canvas.unbind("mousemove");
-                canvas.removeClass('hand');
+    document.getElementById('myAudio').play(); // <-- Добавь эту строчку!
+    hold = 0;
+    canvas.unbind("click");
+    canvas.unbind("mousemove");
+    canvas.removeClass('hand');
+}
             }
         }).mousemove(function (e) {
             var offset = canvas.offset(), x, y;
