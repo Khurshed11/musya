@@ -68,13 +68,10 @@
 </div>
 
 <script type="text/javascript">
-    $('#code').html(config.lines.map(item => {
-        return `<span class="say">${item}</span><br>
-						<span class="say"> </span><br>`
-    }).reduce((a, b) => {
-        return a + b;
-    }))
-   $("#clock-box-inside-text").html(config.names[0] + ' и ' + config.names[1] + ' <span class="STYLE1">вместе уже:</span>');
+    $('#code').html(config.lines.map(function(item) {
+        return '<span class="say">' + item + '</span><br><span class="say"> </span><br>';
+    }).join(''));
+    $("#clock-box-inside-text").html(config.names[0] + ' и ' + config.names[1] + ' <span class="STYLE1">вместе уже:</span>');
 </script>
 
 <script>
@@ -133,24 +130,23 @@
         var foot = tree.footer;
         var hold = 1;
 
-        canvas.click(function (e) {
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            if (seed.hover(x, y)) {
-    document.getElementById('myAudio').play(); // <-- Добавь эту строчку!
-    hold = 0;
-    canvas.unbind("click");
-    canvas.unbind("mousemove");
-    canvas.removeClass('hand');
-}
-            }
-        }).mousemove(function (e) {
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            canvas.toggleClass('hand', seed.hover(x, y));
-        });
+      canvas.click(function (e) {
+    var offset = canvas.offset(), x, y;
+    x = e.pageX - offset.left;
+    y = e.pageY - offset.top;
+    if (seed.hover(x, y)) {
+        document.getElementById('myAudio').play();
+        hold = 0;
+        canvas.unbind("click");
+        canvas.unbind("mousemove");
+        canvas.removeClass('hand');
+    }
+}).mousemove(function (e) {
+    var offset = canvas.offset(), x, y;
+    x = e.pageX - offset.left;
+    y = e.pageY - offset.top;
+    canvas.toggleClass('hand', seed.hover(x, y));
+});
 
         var seedAnimate = eval(Jscex.compile("async", function () {
             seed.draw();
